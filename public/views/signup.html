@@ -1,0 +1,37 @@
+<div class="content">
+  <div class="container">
+
+
+    <form name="formUser" novalidated>
+
+      <div class="form-group" ng-class="{ 'has-error' : formUser.name.$invalid && !formUser.name.$pristine }">
+        <label for="name">Name</label>
+        <input ng-model="signup.formUser.name" type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : formUser.username.$invalid && !formUser.username.$pristine }">
+        <label for="username">Username</label>
+        <input ng-model="signup.formUser.username" type="text" ng-trim="true" ng-minlength="3" ng-maxlength="8" class="form-control" id="username" name="username" placeholder="Username">
+        <!-- show an error if username is too short -->
+        <p ng-show="formUser.username.$error.minlength">Username is too short.</p>
+
+        <!-- show an error if username is too long -->
+        <p ng-show="formUser.username.$error.maxlength">Username is too long.</p>
+
+        <!-- show an error if this isn't filled in -->
+        <p ng-show="formUser.username.$error.required">Your username is required.</p>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : formUser.email.$invalid && !formUser.email.$pristine }">
+        <label for="email">Email address</label>
+        <input ng-model="signup.formUser.email" type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : formUser.password.$invalid && !formUser.password.$pristine }">
+        <label for="password">Password</label>
+        <input ng-model="signup.formUser.password" type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+      </div>
+
+      <button ui-sref="login" type="button" class="btn btn-default">Cancel</button>
+      <button ng-disabled="formUser.$invalid" ng-click="signup.create()" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+</div>

@@ -12,7 +12,12 @@
       return {
         verify: verify,
         isLogged: isLogged,
-        logOut: logOut
+        logOut: logOut,
+        login: login
+      }
+
+      function login(data){
+        return $http.post('auth/login', data);
       }
 
       function verify(lastUser){

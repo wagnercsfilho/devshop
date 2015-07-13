@@ -3,12 +3,33 @@
   
 
 <div class="row">
-	<div class="col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+	<div class="col-xs-10 col-sm-10 col-md-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2">
 		
 	
 
 
 <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form name="formLogin" novalidate="novalidate">
+                              <div class="form-group" ng-class="{ 'has-error' : formLogin.email.$invalid && !formLogin.email.$pristine }">
+                                  <label for="username" class="control-label">Username</label>
+                                  <input ng-model="login.formLogin.email" type="email" class="form-control" id="username" name="email" required title="Please enter you email" placeholder="example@gmail.com">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group" ng-class="{ 'has-error' : formLogin.password.$invalid && !formLogin.password.$pristine }">
+                                  <label for="password" class="control-label">Password</label>
+                                  <input ng-model="login.formLogin.password" type="password" class="form-control" id="password" name="password" required title="Please enter your password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <button ng-disabled="formLogin.$invalid" ng-click="login.login()" type="submit" class="btn btn-primary btn-block">
+                              <i class="fa fa-envelope-o"></i> Login </button>
+                              <button ng-click="login.authenticate()" type="button" class="btn btn-success btn-block">
+                              <i class="fa fa-github"></i> Login with Github</button>
+                          </form>
+                          
+                      </div>
+                  </div>
                   <div class="col-xs-6">
                       <p class="lead">Register now for <span class="text-success">FREE</span></p>
                       <ul class="list-unstyled" style="line-height: 2">
@@ -18,7 +39,8 @@
                           <li><span class="fa fa-check text-success"></span> Fast checkout</li>
                           <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
                       </ul>
-                      <p><a ng-click="login.authenticate()" href class="btn btn-info btn-block"><i class="fa fa-github"></i> Login with Github!</a></p>
+                      <p><a ui-sref="signup" href class="btn btn-primary btn-block"><i class="fa fa-envelope-o"></i> Yes please, register now!</a></p>
+                      <p><a ng-click="login.authenticate()" href class="btn btn-info btn-block"><i class="fa fa-github"></i> Sign Up with Github</a></p>
                   </div>
               </div>
           </div>

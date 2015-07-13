@@ -7,9 +7,16 @@
     $stateProvider
 
     .state('login', {
-      url: '/login/:step',
+      url: '/login',
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl as login',
+      authenticate: false
+    })
+
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'views/signup.html',
+      controller: 'SignupCtrl as signup',
       authenticate: false
     })
 

@@ -22,12 +22,13 @@ module.exports = {
 	      return res.status(409).send({ message: 'Email is already taken' });
 	    }
 	    var user = new User({
-	      name: req.body.displayName,
+	      name: req.body.name,
 	      email: req.body.email,
-	      password: req.body.password
+	      password: req.body.password,
+	      username: req.body.username
 	    });
-	    user.save(function() {
-	      res.send({ token: jwt.createJWT(user) });
+	    user.save(function(newUser) {
+	      res.send({ token: jwt.createJWT(newUser) });
 	    });
 	  });
 	}

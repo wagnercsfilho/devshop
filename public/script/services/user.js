@@ -8,12 +8,19 @@
     function UserService($http, $window, $rootScope){
 
       return {
-        me: me
+        me: me,
+        create: create
       }
 
       function me(lastUser){
         return $http.get('users/me');
       }
+
+      function create(data){
+        return $http.post('users', data);
+      }
+
+
 
     }
 
