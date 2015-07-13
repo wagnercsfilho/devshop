@@ -1,0 +1,27 @@
+{
+  "name": "developer-shop",
+  "version": "1.0.0",
+  "description": "Criar o carrinho de compras de uma loja que vende desenvolvedores baseado no exemplo fornecido.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.3.0",
+    "bcryptjs": "^2.2.0",
+    "body-parser": "^1.13.2",
+    "cors": "^2.7.1",
+    "express": "^4.13.1",
+    "jwt-simple": "^0.3.0",
+    "moment": "^2.10.3",
+    "mongoose": "^4.0.7",
+    "request": "^2.58.0",
+    "restler": "^3.3.0"
+  },
+  "devDependencies": {
+    "supertest": "~0.11.0",
+    "should": "~3.3.1"
+  }
+}

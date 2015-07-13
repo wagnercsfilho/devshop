@@ -1,0 +1,15 @@
+<div class="content" when-scrolled="home.loadMore()">
+<div class="container">
+  
+  <header class="jumbotron hero-spacer">
+            <h1>Welcome!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+            <p ng-show="!$parent.currentUser"><a class="btn btn-primary btn-large" ui-sref="login"><i class="fa fa-github"></i>  Sign Up!</a></p>
+            <p ng-show="$parent.currentUser"><a class="btn btn-primary btn-large" ui-sref="orders"><i class="fa fa-list"></i>  My orders!</a></p>
+  </header>
+
+  <div class="row">
+      <div class="col-md-4 col-xs-12" ng-controller="ListCartCtrl as list" ng-repeat="developer in home.developers" ng-include="'views/includes/cart.html'">
+      </div>             
+</div>
+</div>

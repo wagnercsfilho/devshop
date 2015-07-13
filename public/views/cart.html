@@ -1,0 +1,91 @@
+<div class="content">
+  <div class="container">
+
+    <div class="cart row">
+      <h2>Cart</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Developer</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="product" ng-repeat="c in $parent.cart.items  track by $index">
+            <td class="col-sm-8 col-md-6">
+              <div class="media">
+
+                <div class="media-left">
+                  <a href="#">
+                   <img class="media-object" ng-src="{{ c.developer.avatar_url }}" style="width: 72px; height: 72px;"> 
+                 </a>
+               </div>
+               <div class="media-body">
+                 <h4 class="media-heading"><a href>{{ c.developer.details.name }}</a></h4>
+                 <p>@{{ c.developer.login }}</p>
+                 <p ng-if="c.developer.details.bio"> Bio: {{ c.developer.details.bio }} </p>
+                 <p ng-if="c.developer.details.location"> Location: {{ c.developer.details.location }} </p>
+               </div>
+             </div>
+
+           </td>
+           <td class="col-sm-1 col-md-1" style="text-align: center">
+             <input type="number" min="1" max="100" class="form-control" id="exampleInputEmail1" ng-model="c.quantity">
+           </td>
+           <td class="col-sm-1 col-md-1 text-center">{{ c.developer.price | currency }}</td>
+           <td class="col-sm-1 col-md-1 text-center">{{ (c.developer.price * c.quantity) | currency }}</td>
+           <td class="col-sm-1 col-md-1 text-center">
+            <button ng-click="cart.updateItem(c.developer, c.quantity)" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+            <button ng-click="cart.removeItem(c.developer)" class="btn btn-danger btn-sm "><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td><h5>Subtotal</h5></td>
+          <td class="text-right"><h5><strong>{{ $parent.cart.subTotal | currency }}</strong></h5></td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td><h5>Coupon</h5> 
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="cart.discountCoupon">
+            <span class="input-group-btn">
+              <button ng-click="cart.applyDiscountCoupon(cart.discountCoupon)" ng-disabled="!cart.discountCoupon" class="btn btn-default" type="button"><i class="fa fa-refresh"></i></button>
+            </span>
+          </div><!-- /input-group -->
+          </td>
+          <td class="text-right"><h5 ng-show="$parent.cart.discount > 0"><strong>-{{ $parent.cart.discount | currency }}</strong></h5></td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td><h3>Total</h3></td>
+          <td class="text-right"><h3><strong>{{ $parent.cart.total | currency }}</strong></h3></td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td>
+            <button type="button" class="btn btn-default pull-right" ui-sref="home">
+              <span class="glyphicon glyphicon-shopping-cart "></span> Continue Shopping
+            </button></td>
+            <td>
+              <button type="button" class="btn btn-success pull-right" ng-click="cart.checkout()">
+                Checkout <span class="glyphicon glyphicon-play"></span>
+              </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>

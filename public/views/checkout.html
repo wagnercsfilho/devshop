@@ -1,0 +1,65 @@
+<div class="content">
+  <div class="container">
+
+
+<div class="row">
+    <div class="well col-xs-10 col-sm-10 col-md-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <address>
+                    <strong>{{ $parent.currentUser.name }}</strong>
+                    <br>
+                    {{ $parent.currentUser.username }}
+                </address>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Developer</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="c in $parent.cart.items  track by $index">
+                    <td class="col-md-8"><em>{{ c.developer.login }}</em></h4></td>
+                    <td class="col-md-2" style="text-align: center"> {{ c.quantity }} </td>
+                    <td class="col-md-1 text-center">{{ c.developer.price | currency }}</td>
+                    <td class="col-md-1 text-center">{{ (c.developer.price * c.quantity) | currency }}</td>
+                </tr>
+                <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    <td class="text-right">
+                        <p>
+                            <strong>Subtotal: </strong>
+                        </p>
+                        <p>
+                            <strong>Coupon: </strong>
+                        </p></td>
+                        <td class="text-center">
+                            <p>
+                                <strong>{{ $parent.cart.subTotal | currency }}</strong>
+                            </p>
+                            <p>
+                                <strong ng-show="$parent.cart.discount > 0">-{{ $parent.cart.discount | currency }}</strong>
+                            </p></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                            <td class="text-center text-danger"><h4><strong>{{ $parent.cart.total | currency }}</strong></h4></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success btn-lg btn-block" ng-click="checkout.pay()">
+                    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+
+  </div>
+        </div>

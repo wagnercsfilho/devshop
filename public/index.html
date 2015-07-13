@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-br" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Coding Challenge VTEX-->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link href="bower_components/angular-growl-v2/build/angular-growl.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body ng-controller="MainCtrl as main">
+  <div growl></div>
+
+  <div class="container">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" ui-sref="home">Dev Shop</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: $state.includes('home')}"><a ui-sref="home">Developers</a></li>
+            <li ng-class="{active: $state.includes('cart')}"><a ui-sref="cart">Cart</a></li>
+          </ul>
+          <div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search">
+              <div class="input-group">
+                <input type="text" ng-model="$parent.q" class="form-control" placeholder="Search a Developer" name="search">
+                <div class="input-group-btn" ng-click="main.search()">
+                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+
+             <li class="dropdown">
+                    <a ui-sref="login" ng-show="!$parent.currentUser">Login</a> 
+                    <a href ng-show="$parent.currentUser" class="dropdown-toggle" data-toggle="dropdown">
+                        <img ng-src="{{ $parent.currentUser.picture }}" style="width: 18px;">
+                        <span class="hidden-sm">{{ $parent.currentUser.name }}</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                        <p class="text-center">
+                                            <img ng-src="{{ $parent.currentUser.picture }}" style="width: 100%;">
+                                        </p>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8">
+                                        <p class="text-left"><strong>{{ $parent.currentUser.name }}</strong></p>
+                                        <p class="text-left small">@{{ $parent.currentUser.username }}</p>
+                                        <p class="text-left">
+                                            <a ui-sref="orders" class="btn btn-primary btn-block btn-sm">My orders</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>
+                                            <a ng-click="main.logOut()" href class="btn btn-default btn-block">Log out</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{ main.getQuantity() }} - Developers<span class="caret"></span></a>
+              
+              <ul class="dropdown-menu dropdown-cart" role="menu" >
+                <div class="alert alert-info" style="margin: 5px;" role="alert" ng-show="cart.items.length == 0">
+                  Cart is empty
+                </div>
+                <li ng-show="cart.items.length > 0" ng-repeat="c in cart.items  track by $index">
+                  <span class="item">
+                    <span class="item-left">
+                      <img class="avatar" ng-src="{{ c.developer.avatar_url }}" alt="" />
+                      <span class="item-info">
+                        <span>{{ c.quantity }} x {{ c.developer.login }}</span>
+                        <span>{{ c.developer.price | currency }}</span>
+                      </span>
+                    </span>
+                    <span class="item-right">
+                      <button ng-click="main.removeItem(c.developer)" class="btn btn-xs btn-danger pull-right"><i class="fa fa-trash-o"></i></button>
+                    </span>
+                  </span>
+                </li>
+                <li class="divider"></li>
+                <li><a class="text-center" ui-sref="cart">View Cart</a></li>
+              </ul>
+            </li>
+           
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <ui-view></ui-view>
+
+    <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright © DevShop 2015 by @wagnercsfilho</p>
+                </div>
+            </div>
+        </footer>
+
+  </div> <!-- /container -->
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/ui-route/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/satellizer/satellizer.min.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-growl-v2/build/angular-growl.min.js"></script>
+
+  <script src="script/app.js"></script>
+  <script src="script/directives/infinite-scroll.js"></script>
+  <script src="script/controllers/main.js"></script>
+  <script src="script/controllers/search.js"></script>
+  <script src="script/controllers/home.js"></script>
+  <script src="script/controllers/cart.js"></script>
+  <script src="script/controllers/details.js"></script>
+  <script src="script/controllers/login.js"></script>
+  <script src="script/controllers/orders.js"></script>
+  <script src="script/controllers/checkout.js"></script>
+  <script src="script/controllers/list-cart.js"></script>
+  <script src="script/services/interceptor.js"></script>
+  <script src="script/services/developers.js"></script>
+  <script src="script/services/order.js"></script>
+  <script src="script/services/auth.js"></script>
+  <script src="script/services/user.js"></script>
+  <script src="script/services/cart.js"></script>
+</body>
+</html>
