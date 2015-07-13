@@ -8,6 +8,7 @@
                                     <div class="price col-md-8" ui-sref="details({id: developer.login})">
                                         <h5><strong>{{ developer.details.name }}</strong></h5>
                                         <p>@{{ developer.login }}</p>
+                                        <p ng-show="developer.details.location">Location: {{ developer.details.location }}</p>
                                         
                                     </div>
                                     <div class="rating hidden-sm col-md-4">
